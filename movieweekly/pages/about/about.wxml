@@ -1,0 +1,4 @@
+<!--logs.wxml-->
+<image src='../../images/picture1.jpg'></image>
+<text>电影周周看</text>
+<text>我每周推荐一部好片</text>

@@ -1,0 +1,15 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/about/about"
+  ],
+  "window":{
+    "backgroundTextStyle":"dark",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "关于",
+    "navigationBarTextStyle":"black",
+    "enablePullDownRefresh":true
+
+  }
+}
