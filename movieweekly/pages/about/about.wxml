@@ -1,4 +1,6 @@
 <!--logs.wxml-->
-<image src='../../images/picture1.jpg'></image>
-<text>电影周周看</text>
-<text>我每周推荐一部好片</text>
+<view class='container'>
+  <image class='about-banner'  src='../../images/picture1.jpg'></image>
+  <text style='font-size:60rpx;font-weight:bold'>电影周周看</text>
+  <view><text>我</text><navigator hover-class='nav-hover' class='nav-default' open-type="switchTab" style='display:inline' url='../weekly/weekly'>每周推荐</navigator><text>一部好片</text></view>
+</view>
