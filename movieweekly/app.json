@@ -10,14 +10,14 @@
         {
           "text": "每周推荐",
           "pagePath": "pages/about/about",
-          "iconPath": "images/icons/详情.png",
-          "selectedIconPath": "images/icons/详情.png"
+          "iconPath": "images/icons/about.png",
+          "selectedIconPath": "images/icons/about-selected.png"
         },
         {
           "text": "关于",
           "pagePath": "pages/weekly/weekly",
-          "iconPath": "images/icons/信息.png",
-          "selectedIconPath": "images/icons/信息.png"
+          "iconPath": "images/icons/weekly.png",
+          "selectedIconPath": "images/icons/weekly-selected.png"
         }
       ],
       "color":"#000000",

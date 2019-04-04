@@ -1,6 +1,6 @@
 <view class='container'>
   <text>本周推荐</text>
-  <image src='../../images/picture2.png'></image>
-  <text>税徽</text>
+  <image src='../../images/jf.jpg'></image>
+  <text>教父</text>
   <text>点评: 最精彩的剧本,最真实的电影</text>
 </view>
