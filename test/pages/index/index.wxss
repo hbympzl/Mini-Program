@@ -1,0 +1,25 @@
+/**index.wxss**/
+view{
+  font-size: 30rpx;
+}
+.isLive{
+  background-color: greenyellow;
+  border-radius: 10%;
+}
+.isnotLive{
+  background-color: red;
+   border-radius: 10%;
+}
+.item{
+  background-color: #eee
+}
+.nickName{
+  font-family: SimSun;
+  font-weight: bolder;
+}
+.nowPicture{
+  width: 160rpx;
+  height: 120rpx;
+  float: right;
+  border-radius: 30%;
+}

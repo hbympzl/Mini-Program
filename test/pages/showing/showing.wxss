@@ -1,0 +1,40 @@
+.detail-image {
+  width: 300rpx;
+  height: 300rpx;
+}
+.detail-swiper {
+  height: 96vh; 
+}
+.detail {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+.nowPicture{
+    width: 300px;
+    height: 220px;
+    border-radius: 5%;
+}
+
+.zb-card{
+  height: 100%;
+  width: 100%;
+  background: #fe9923;
+  margin: 20rpx 20rpx;
+  position: relative;
+}
+.isLive{
+  background-color: greenyellow;
+  border-radius: 10%;
+}
+.isnotLive{
+  background-color: red;
+   border-radius: 10%;
+}
+.nickName{
+  font-family: SimSun;
+  font-weight: bolder;
+}
+page {
+  background-color: #fe9923;
+} 

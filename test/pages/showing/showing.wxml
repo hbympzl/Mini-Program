@@ -1,0 +1,16 @@
+<view class=''>
+    <swiper class='detail-swiper' indicator-dots='{{true}}'
+   previous-margin="50rpx" next-margin="50rpx">
+      <swiper-item class="detail" wx:for="{{obj}}">
+        <view class='container zb-card'>
+          <view><image class="nowPicture" src='{{item.room_src}}'  bindtap='toDtail' data-zb_id='{{item.room_id}}'></image></view>
+          <view><text class='nickName'>{{item.nickname}}</text></view>
+          <view><text class="isLive" hidden="{{item.show_status == 2 ? true : false}}"> 直播中</text>
+          <text class="isnotLive" hidden="{{item.show_status == 1 ? true : false}}"> 未直播</text>   </view>
+            <view><text style="font-weight: bolder">{{item.room_name}}</text></view>
+            <view><text style='font-size:30rpx'>{{item.close_notice}}</text></view>
+            <view hidden='{{item.show_status==2}}'>人气:<text style='color:yellow'>{{item.online}}</text></view>
+        </view>
+      </swiper-item>
+    </swiper>
+</view>

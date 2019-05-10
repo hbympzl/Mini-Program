@@ -1,0 +1,28 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/showing/showing",
+    "pages/detail/detail"
+ 
+  ],
+  "tabBar": {
+    "backgroundColor":"#fe9923",
+    "list": [{
+      "text": "全部关注",
+      "pagePath": "pages/index/index",
+      "iconPath": "images/icons/todo.png",
+      "selectedIconPath":"images/icons/todo-active.png"
+    },{
+      "text": "正在直播",
+      "pagePath": "pages/showing/showing",
+      "iconPath": "images/icons/history.png",
+      "selectedIconPath": "images/icons/history-active.png"}]
+  },
+  "window":{
+    "backgroundColor": "#fe9923",
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fe9923",
+    "navigationBarTitleText": "斗鱼关注",
+    "navigationBarTextStyle":"black"
+  }
+}

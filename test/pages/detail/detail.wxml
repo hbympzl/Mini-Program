@@ -1,0 +1,10 @@
+<view class='container' >
+<view style='width:100%'><image style='width:25%;height:80px;padding-bottom:8px' src='{{obj.avatar_small}}'></image><image style='width:40%;height:100px' src='/images/douyu.png'></image></view>
+  <view><image src='{{obj.room_src}}'></image></view>
+  <view>房间标题:<text>{{obj.room_name}}</text></view>
+  <view>房间号:<text>{{obj.room_id}}</text></view>
+   <view>游戏名称:<text>{{obj.game_name}}</text></view>
+   <view hidden='{{obj.show_status == 2}}'>当前人气值:<text>{{obj.online}}</text></view>
+</view>
+
+<!-- <image style='width:40px;height:40px' src='{{obj.avatar_small}}'></image> -->

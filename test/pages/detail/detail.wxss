@@ -1,0 +1,24 @@
+
+.detail-image {
+  width: 300rpx;
+  height: 300rpx;
+}
+text {
+  font-weight:bold
+}
+view{
+  text-align: center;
+  font-size: 50rpx;
+}
+page{
+  height: 100%;
+}
+.container{
+  background-color: #fe9923;
+padding: 0 0;
+ overflow: hidden;
+ padding-bottom: 10%;
+
+
+
+}

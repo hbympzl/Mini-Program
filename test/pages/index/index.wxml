@@ -1,0 +1,15 @@
+<!--index.wxml-->
+<view class=''>
+    <block style="display: flex;" wx:for="{{obj}}">
+      <view class='item' >
+          <image class="nowPicture" src='{{item.room_src}}'  bindtap='toDtail' data-zb_id='{{item.room_id}}'></image>
+          主播:<text class='nickName'>{{item.nickname}}</text>
+          直播状态:
+          <text class="isLive" hidden="{{item.show_status == 2 ? true : false}}"> 直播中 </text>
+          <text class="isnotLive" hidden="{{item.show_status == 1 ? true : false}}"> 未直播 </text>
+        <view> 房间标题:<text>{{item.room_name}}</text></view>
+        <view> 小黑板:<text>{{item.close_notice}}</text></view>
+        <view  style=' height: 20rpx; background-color:white'></view>
+      </view>
+    </block>
+</view>
