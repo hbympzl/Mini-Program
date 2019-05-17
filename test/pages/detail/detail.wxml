@@ -1,10 +1,12 @@
 <view class='container' >
 <view style='width:100%'><image style='width:25%;height:90px;border-radius: 50%;' src='{{obj.avatar_small}}'></image><image style='width:40%;height:100px;border-radius: 5%;' src='/images/douyu.png'></image></view>
+<wxs module="filters" src="../../utils/filters.wxs"></wxs>
   <view><image src='{{obj.room_src}}'></image></view>
   <view>房间标题:<text>{{obj.room_name}}</text></view>
   <view>房间号:<text>{{obj.room_id}}</text></view>
    <view>游戏名称:<text>{{obj.game_name}}</text></view>
    <view hidden='{{obj.show_status == 2}}'>当前人气值:<text>{{obj.online}}</text></view>
+   <view hidden='{{obj.show_status == 2}}'>直播时长:<text>{{filters.toFix((nowtime-obj.show_time)/60,1)}}</text>分钟</view>
 </view>
 
 <!-- <image style='width:40px;height:40px' src='{{obj.avatar_small}}'></image> -->

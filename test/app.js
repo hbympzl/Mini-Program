@@ -1,4 +1,4 @@
-var cookie = "Ò³Ãæ·¢ËÍµÄµÇÂ¼cookie"
+var cookie = "dy_did=8b4f0bbf079151de88a2f70c00041501; acf_did=8b4f0bbf079151de88a2f70c00041501; smidV2=201905101509030124870d106d135ea47cddd4201c0bf500f111eb7fd23f020; acf_uid=21433408; acf_username=auto_MxMA8U3Igp; acf_nickname=whaaaaaaaaaaaaat; acf_ltkid=73608779; acf_auth=635czjp7zUUAM2DewMb%2BPAwF3jw1e4DNNKlhGNt8zVW9eZQ2gRXWeSf%2FC8GpzXQEfkMjW3IKej9dB2KHRSWykjlm5034eK5gUXwtrPSp2m8QrhevCdfCRf%2BFjGV08Q; wan_auth37wan=4422bce55d8d0KVMgcqd9ytNdRaWQtlK7QrYrkJK0z6S%2Bv1oacMOBk0wnhC8BQDFC7WZqeY2ebf1QMOdOyWzbCYs%2BJqxp%2Buo60utl%2BdbP%2FRxpDRjvA; acf_own_room=0; acf_groupid=1; acf_phonestatus=1; acf_ct=0; acf_biz=1; acf_stk=c65cc504277c5758; Hm_lvt_e99aee90ec1b2106afe7ec3b199020a7=1557817755,1557904243,1558066165,1558076963; acf_avatar=//apic.douyucdn.cn/upload/avatar_v3/201810/31aab2a99ec01a303ce8c4ee77872865_; PHPSESSID=j31o4j5as44aua1n63f1rclfr4; acf_ccn=3fba685fac1b00f421327962da034a24; Hm_lpvt_e99aee90ec1b2106afe7ec3b199020a7=1558077446"
 wx.setStorage({
   key: 'cookie',
   data: cookie,

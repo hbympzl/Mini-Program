@@ -58,8 +58,12 @@ Page({
             var targetItem = res.data.data.list[item];
           }
         }
+        var timestamp = Date.parse(new Date());
+        timestamp = timestamp / 1000;
+        
         that.setData({
-          obj: targetItem
+          obj: targetItem,
+          nowtime: timestamp
         })
         // 隐藏导航栏加载框
         wx.hideNavigationBarLoading();
