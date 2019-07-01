@@ -1,0 +1,12 @@
+{
+  "pages": [
+    "pages/index/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "GetGoodGrades",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap99.json"
+}

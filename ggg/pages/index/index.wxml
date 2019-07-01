@@ -1,0 +1,13 @@
+<!--index.wxml-->
+<view class="container">
+  <view>总分数:{{total_score}}</view>
+  <view>当前时间:{{now_time}}</view>
+</view>
+<view class="container">
+  <button style='width:95%'  bindtap="subtraction">-</button> 
+     <label>
+     {{score}}
+     </label>
+  <button style='width:95%' bindtap='addition'>+</button> 
+</view>
+<view class="container">下部分</view>
