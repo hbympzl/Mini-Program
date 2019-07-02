@@ -24,7 +24,6 @@ Page({
   subtraction: function (e) {
     var todayScore = wx.getStorageSync('today_score');
     var subScore = todayScore - 1;
-    console.log(subScore);
     this.setData({
       score: subScore
     })
@@ -47,8 +46,8 @@ Page({
     var interval = setInterval(function () {
       time = util.formatTime(new Date());
       that.timeGoesBy(time)
-      //if (time.substring(11, 20) == '00:00:00') {
-      if(false){
+      if (time.substring(11, 20) == '00:00:00') {
+      //if(false){
         //每天12点的时候进行数据上传,直接上传到缓存当中
         //取出缓存
         totalScore = wx.getStorageSync("total_score");

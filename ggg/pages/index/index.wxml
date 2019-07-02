@@ -1,18 +1,24 @@
 <!--index.wxml-->
 <view class='container'>
   <view class="flex-wrp">
-    <view><image class='scorePng'src='/images/goods/score.png'></image><text class='indexContentNum' style='color:#FF9900;font-weight:border'>{{total_score}}</text></view> 
-    <view style='margin-left:10px;' bindtouchstart="bindTouchStart" bindtouchend="bindTouchEnd" bindtap='synScore'><button  style='width:80rpx;height:60rpx;  border-radius:6px'></button></view> 
+    <view>
+      <image class='scorePng' src='/images/goods/score.png' bindtouchstart="bindTouchStart" bindtouchend="bindTouchEnd" bindtap='synScore'></image>
+      <text class='indexContentNum' style='color:#FF9900;font-weight:border' bindtouchstart="bindTouchStart" bindtouchend="bindTouchEnd" bindtap='synScore'>{{total_score}}</text>
+    </view>
+    <!-- <view style='margin-left:10px;' bindtouchstart="bindTouchStart" bindtouchend="bindTouchEnd" bindtap='synScore'>
+      <button style='width:80rpx;height:60rpx;  border-radius:6px'></button>
+    </view> -->
   </view>
-  <view><text class='indexContent'>当前时间:</text><text class='indexContentNum'>{{now_time}}</text></view>
 </view>
+ <view class="container" style='height:0px'>
+    <text class='indexContent'></text>
+    <text class='indexContentNum'>{{now_time}}</text>
+  </view>
 <view class="container">
-  <button class='mainbtn' style="background-color:#00CC33" 
-  bindtap='addition' bindlongtap='additionplus' bindtouchend='endAdditionplus'>+</button> 
-     <label style="font-size:100px">
-     {{score}}
-     </label>
-   <button class='mainbtn' style="background-color:#FF3300"         
-  bindtap="subtraction" bindlongtap='subtractionplus' bindtouchend='endsubtractionplus'>-</button> 
+  <button class='mainbtn' style="background-color:#00CC33" bindtap='addition' bindlongtap='additionplus' bindtouchend='endAdditionplus'>+</button>
+  <label style="font-size:100px;margin-left:-6%;color:white">
+    {{score}}
+  </label>
+  <button class='mainbtn' style="background-color:#FF3300" bindtap="subtraction" bindlongtap='subtractionplus' bindtouchend='endsubtractionplus'>-</button>
 
 </view>

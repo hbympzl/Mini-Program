@@ -12,53 +12,11 @@ Page({
         id: 199410161
       },
       {
-        name: "日本任天堂（Nintendo）便携掌上游戏机 Switch NS主机 红蓝手柄 日版",
-        score: 1001,
-        imagePath: "/images/goods/ns.jpg",
-        id: 199410162
+        name: "LOL至臻皮肤门票",
+        score: 30,
+        imagePath: "/images/goods/zz.png",
+        id: 19941016
       },
-      {
-        name: "日本任天堂（Nintendo）便携掌上游戏机 Switch NS主机 红蓝手柄 日版",
-        score: 1001,
-        imagePath: "/images/goods/ns.jpg",
-        id: 199410163
-      },
-      {
-        name: "日本任天堂（Nintendo）便携掌上游戏机 Switch NS主机 红蓝手柄 日版",
-        score: 1001,
-        imagePath: "/images/goods/ns.jpg",
-        id: 199410164
-      },
-      {
-        name: "日本任天堂（Nintendo）便携掌上游戏机 Switch NS主机 红蓝手柄 日版",
-        score: 1001,
-        imagePath: "/images/goods/ns.jpg",
-        id: 199410165
-      },
-      {
-        name: "日本任天堂（Nintendo）便携掌上游戏机 Switch NS主机 红蓝手柄 日版",
-        score: 1001,
-        imagePath: "/images/goods/ns.jpg",
-        id: 199410166
-      },
-      {
-        name: "日本任天堂（Nintendo）便携掌上游戏机 Switch NS主机 红蓝手柄 日版",
-        score: 1001,
-        imagePath: "/images/goods/ns.jpg",
-        id: 199410167
-      },
-      {
-        name: "日本任天堂（Nintendo）便携掌上游戏机 Switch NS主机 红蓝手柄 日版",
-        score: 1001,
-        imagePath: "/images/goods/ns.jpg",
-        id: 199410168
-      },
-      {
-        name: "日本任天堂（Nintendo）便携掌上游戏机 Switch NS主机 红蓝手柄 日版",
-        score: 1001,
-        imagePath: "/images/goods/ns.jpg",
-        id: 199410169
-      }
     ]
   },
   exchangeGoods:function(e){
@@ -69,9 +27,20 @@ Page({
     for (var i = 0; i< goods.length; i ++){
       if (goods[i].id == exchangeId){
         if (totalScore >= goods[i].score){
-          console.log("兑换成功!!")
+          wx.showToast({
+            title: '兑换成功',
+          })
+
         }else{
-          console.log("兑换失败!!")
+          if (typeof (goods[i].score) == 'string'){
+            wx.showToast({
+              title: '已经兑换过了',
+            })
+          }else{
+            wx.showToast({
+              title: '积分不足',
+            })
+          }
         }
       }
     }

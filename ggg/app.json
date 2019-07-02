@@ -1,29 +1,31 @@
 {
   "pages": [
-    "pages/reward/reward",
-    "pages/index/index"
+    "pages/index/index",
+    "pages/reward/reward"
   ],
-    "tabBar": {
-      "list": [
-        {
-          "text": "每日计分",
-          "pagePath": "pages/index/index",
-          "iconPath": "images/icons/todo.png",
-          "selectedIconPath": "images/icons/todo-active.png"
-        },
-        {
-          "text": "奖池",
-          "pagePath": "pages/reward/reward",
-          "iconPath": "images/icons/history.png",
-          "selectedIconPath": "images/icons/history-active.png"
-        }
-      ]
-    },
+  "tabBar": {
+    "backgroundColor": "#000000",
+    "list": [
+      {
+        "text": "每日计分",
+        "pagePath": "pages/index/index",
+        "iconPath": "images/icons/todo.png",
+        "selectedIconPath": "images/icons/todo-active.png"
+      },
+      {
+        "text": "奖池",
+        "pagePath": "pages/reward/reward",
+        "iconPath": "images/icons/history.png",
+        "selectedIconPath": "images/icons/history-active.png"
+      }
+    ]
+  },
   "window": {
+    "backgroundColor": "black",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
+    "navigationBarBackgroundColor": "#000000",
     "navigationBarTitleText": "GetGoodGrades",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "white"
   },
   "sitemapLocation": "sitemap99.json"
 }
