@@ -1,7 +1,24 @@
 {
   "pages": [
+    "pages/reward/reward",
     "pages/index/index"
   ],
+    "tabBar": {
+      "list": [
+        {
+          "text": "每日计分",
+          "pagePath": "pages/index/index",
+          "iconPath": "images/icons/todo.png",
+          "selectedIconPath": "images/icons/todo-active.png"
+        },
+        {
+          "text": "奖池",
+          "pagePath": "pages/reward/reward",
+          "iconPath": "images/icons/history.png",
+          "selectedIconPath": "images/icons/history-active.png"
+        }
+      ]
+    },
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",

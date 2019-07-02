@@ -1,13 +1,18 @@
 <!--index.wxml-->
-<view class="container">
-  <view>总分数:{{total_score}}</view>
-  <view>当前时间:{{now_time}}</view>
+<view class='container'>
+  <view class="flex-wrp">
+    <view><image class='scorePng'src='/images/goods/score.png'></image><text class='indexContentNum' style='color:#FF9900;font-weight:border'>{{total_score}}</text></view> 
+    <view style='margin-left:10px;' bindtouchstart="bindTouchStart" bindtouchend="bindTouchEnd" bindtap='synScore'><button  style='width:80rpx;height:60rpx;  border-radius:6px'></button></view> 
+  </view>
+  <view><text class='indexContent'>当前时间:</text><text class='indexContentNum'>{{now_time}}</text></view>
 </view>
 <view class="container">
-  <button style='width:95%'  bindtap="subtraction">-</button> 
-     <label>
+  <button class='mainbtn' style="background-color:#00CC33" 
+  bindtap='addition' bindlongtap='additionplus' bindtouchend='endAdditionplus'>+</button> 
+     <label style="font-size:100px">
      {{score}}
      </label>
-  <button style='width:95%' bindtap='addition'>+</button> 
+   <button class='mainbtn' style="background-color:#FF3300"         
+  bindtap="subtraction" bindlongtap='subtractionplus' bindtouchend='endsubtractionplus'>-</button> 
+
 </view>
-<view class="container">下部分</view>

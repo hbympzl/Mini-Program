@@ -5,6 +5,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 200rpx 0;
+  padding: 100rpx 0;
   box-sizing: border-box;
 } 
+.scorePng {
+    width: 27px;
+    height: 15px;
+    margin-right: 5px;
+
+}

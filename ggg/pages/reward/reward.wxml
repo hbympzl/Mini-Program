@@ -1,0 +1,29 @@
+<!--index.wxml-->
+<view class=''>
+  <block wx:for="{{whatwewant}}">
+    <view class='item flex-wrp' style="flex-direction: column;">
+      <view class='flex-wrp' style="flex-direction: raw;">
+        <view>
+          <image class="nowPicture" src='{{item.imagePath}}' bindtap='toDtail'></image>
+        </view>
+        <view>
+          <text class='nickName'>{{item.name}}</text>
+        </view>
+      </view>
+      <view class='flex-wrp' style="flex-direction: raw;">
+        <view class='flex-wrp view_right' style="flex-direction: raw;">
+          <view>
+            <image class='scorePng' src='/images/goods/score.png'></image>
+          </view>
+          <view>
+            <text style='color:white'>{{item.score}}</text>
+          </view>
+        </view>
+        <view class='flex-wrp view_right'>
+          <button bindtap='exchangeGoods' data-whatwewant-id='{{item.id}}' class='dh_btn'>兑换</button>
+        </view>
+      </view>
+    </view>
+
+  </block>
+</view>
