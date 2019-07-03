@@ -12,7 +12,7 @@
       </view>
       <view class='flex-wrp' style="flex-direction: raw;">
         <view class='flex-wrp view_right' style="flex-direction: raw;">
-          <view>
+          <view bindtap='exchangeGoods' data-whatwewant-id='{{item.id}}'>
             <image class='scorePng' src='/images/goods/score.png'></image>
           </view>
           <view bindtap='exchangeGoods' data-whatwewant-id='{{item.id}}' style='margin:5px'>
