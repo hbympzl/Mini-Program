@@ -1,0 +1,13 @@
+<view class="container" style='width:100%'>
+  <view>
+    <button class='mainbtn' style="background-color:#00CC33" bindtap='addition' bindlongtap='additionplus' bindtouchend='endAdditionplus'>+</button>
+  </view>
+  <view style='display:flex;align-items:center;justify-content:center;'>
+    <label style="font-size:100px;color:white;">
+      {{score}}
+    </label>
+  </view>
+  <view>
+    <button class='mainbtn' style="background-color:#FF3300" bindtap="subtraction" bindlongtap='subtractionplus' bindtouchend='endsubtractionplus'>-</button>
+  </view>
+</view>

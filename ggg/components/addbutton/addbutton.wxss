@@ -1,0 +1,26 @@
+/**index.wxss**/
+page{
+  background-color: black
+}
+button{
+  border-radius:60px;
+  line-height:2.55555556;
+}
+
+.mainbtn {
+  width: 85%;
+  height: 180rpx;
+  font-size: 35px;
+
+}
+.indexContent{
+  font-family: SimSun;
+  font-weight: bold;
+  font-size: 50rpx;
+}
+.indexContentNum{
+  font-weight: bold;
+  font-size: 45rpx;
+  color:white;
+}
+.flex-wrp {display: flex;}

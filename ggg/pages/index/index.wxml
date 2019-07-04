@@ -10,15 +10,11 @@
     </view> -->
   </view>
 </view>
- <view class="container" style='height:0px'>
-    <text class='indexContent'></text>
-    <text class='indexContentNum'>{{now_time}}</text>
-  </view>
-<view class="container">
-  <button class='mainbtn' style="background-color:#00CC33" bindtap='addition' bindlongtap='additionplus' bindtouchend='endAdditionplus'>+</button>
-  <label style="font-size:100px;margin-left:-6%;color:white">
-    {{score}}
-  </label>
-  <button class='mainbtn' style="background-color:#FF3300" bindtap="subtraction" bindlongtap='subtractionplus' bindtouchend='endsubtractionplus'>-</button>
-
+<view class="container" style='height:0px'>
+  <text class='indexContent'></text>
+  <text class='indexContentNum'>{{now_time}}</text>
+</view>
+<view class="container" style='width:100%'>
+    <addbutton id='addbutton'  style='width:100%'>
+    </addbutton>
 </view>
