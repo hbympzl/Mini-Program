@@ -113,5 +113,11 @@ Component({
       wx.setStorageSync('today_score', 0);
       that.onLoad();
     },
+    /***获取缓存中的分数***/
+    getTodayStorage: function () {
+      var that = this;
+      var todayScore = wx.getStorageSync('today_score');
+      return todayScore;
+    },
   },
 })

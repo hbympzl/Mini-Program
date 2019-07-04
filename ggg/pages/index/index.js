@@ -26,7 +26,7 @@ Page({
     if (timeFlag.substring(0, 10) != time.substring(0, 10)) {
       //取出缓存
       totalScore = wx.getStorageSync("total_score");
-     var todayScore = wx.getStorageSync('today_score');
+      var todayScore = that.selectComponent("#addbutton").getTodayStorage();
       //缓存与现有数据相加
       wx.setStorageSync('total_score', totalScore + todayScore);
       //调用组件中的方法进行积分清零
@@ -43,12 +43,12 @@ Page({
     var interval = setInterval(function() {
       time = util.formatTime(new Date());
       that.timeGoesBy(time)
-      if (time.substring(11, 20) == '00:01:50') {
+      if (time.substring(11, 20) == '00:00:00') {
      // if (true) {
         //每天12点的时候进行数据上传,直接上传到缓存当中
         //取出缓存
         totalScore = wx.getStorageSync("total_score");
-        todayScore = wx.getStorageSync('today_score');
+        todayScore = that.selectComponent("#addbutton").getTodayStorage();
         //缓存与现有数据相加
         wx.setStorageSync('total_score', totalScore + todayScore);
         totalScore = wx.getStorageSync("total_score");
@@ -78,8 +78,8 @@ Page({
     var that = this;
     if ((that.data.touchEnd - that.data.touchStart) >= 3000) {
       wx.vibrateLong({});
-      var totalScore = wx.getStorageSync('today_score');
-      wx.setStorageSync('total_score', totalScore);
+      var todayScore = that.selectComponent("#addbutton").getTodayStorage();
+      wx.setStorageSync('total_score', todayScore);
       this.onLoad();
     }
   },
@@ -97,7 +97,7 @@ Page({
   //切换到该页面时触发页面监听事件
   onShow: function() {
     var that = this;
-    var todayScore = wx.getStorageSync('today_score');
+    var todayScore = that.selectComponent("#addbutton").getTodayStorage();
     that.allScore('score', todayScore);
     var totalScore = wx.getStorageSync('total_score');
     that.allScore('total_score', totalScore);
