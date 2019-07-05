@@ -12,11 +12,17 @@ Page({
         id: 199410161
       },
       {
+        name: "索尼（SONY）PS4 Pro 家庭娱乐游戏机 1TB主机（白色）",
+        score: 1500,
+        imagePath: "/images/goods/ps4.png",
+        id: 199410163
+      },
+      {
         name: "LOL至臻皮肤门票",
         score: 30,
         imagePath: "/images/goods/zz.png",
         id: 199410162
-      },
+      }, 
       /*{
         name: "测试",
         score: 1,

@@ -15,6 +15,7 @@ Component({
       //下面要使用 this的时候对象已经改变,只能再此处用that把对象复制一次
       var that = this;
       that.initCache('today_score');
+      wx.setStorageSync('today_score', 0);
       //将缓存中的数据显示在页面上
       var todayScore = wx.getStorageSync('today_score');
       that.allScore('score', todayScore);
@@ -106,9 +107,9 @@ Component({
         })
       }
     },
-    /***********************供外部进行调用的方法****************************/
+    /***********************供外部进行调用的方法**************************/
    /***清空数据缓存并刷新页面***/
-    clearScore: function() {
+    clearTodayScore: function() {
       var that = this;
       wx.setStorageSync('today_score', 0);
       that.onLoad();
@@ -119,5 +120,13 @@ Component({
       var todayScore = wx.getStorageSync('today_score');
       return todayScore;
     },
+    /***未创建分数缓存***/
+    initTodayStorage:function(){
+      var that = this;
+      //缓存不存在的时候加载onload时间加载缓存
+      if(wx.getStorageSync("today_score") == ""){
+        that.onLoad();
+      }
+    }
   },
 })

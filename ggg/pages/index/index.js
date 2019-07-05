@@ -12,9 +12,12 @@ Page({
   },
   //初始加载项
   onLoad: function() {
+
     //创建缓存
     //下面要使用 this的时候对象已经改变,只能再此处用that把对象复制一次
     var that = this;
+    //调用组件缓存
+    that.selectComponent("#addbutton").initTodayStorage();
     that.initCache('today_time');
     that.initCache('total_score');
     //时间跨天进行更新
@@ -26,11 +29,11 @@ Page({
     if (timeFlag.substring(0, 10) != time.substring(0, 10)) {
       //取出缓存
       totalScore = wx.getStorageSync("total_score");
-      var todayScore = that.selectComponent("#addbutton").getTodayStorage();
+      var todayScore = that.selectComponent("#addbutton").getTodayStorage();;
       //缓存与现有数据相加
       wx.setStorageSync('total_score', totalScore + todayScore);
       //调用组件中的方法进行积分清零
-      that.selectComponent("#addbutton").clearScore();
+      that.selectComponent("#addbutton").clearTodayScore();
     }
     //刷新timeflag 记录当前天的时间 后续与跨天后的比对
     timeFlag = util.formatTime(new Date());
@@ -54,7 +57,7 @@ Page({
         totalScore = wx.getStorageSync("total_score");
         that.allScore('total_score', totalScore);
          //调用组件中的方法进行积分清零
-        that.selectComponent("#addbutton").clearScore();
+        that.selectComponent("#addbutton").clearTodayScore();
       }
     }, 1000)
   },
