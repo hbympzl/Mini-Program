@@ -83,6 +83,7 @@ Page({
       wx.vibrateLong({});
       var todayScore = that.selectComponent("#addbutton").getTodayStorage();
       wx.setStorageSync('total_score', todayScore);
+      that.selectComponent("#addbutton").clearTodayScore();
       this.onLoad();
     }
   },
