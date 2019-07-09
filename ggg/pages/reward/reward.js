@@ -19,7 +19,7 @@ Page({
       },
       {
         name: "LOL至臻皮肤门票",
-        score: 30,
+        score: '已兑换',
         imagePath: "/images/goods/zz.png",
         id: 199410162
       }, 
