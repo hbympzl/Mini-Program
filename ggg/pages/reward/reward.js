@@ -18,6 +18,12 @@ Page({
         id: 199410163
       },
       {
+        name: "switch lite",
+        score: 800,
+        imagePath: "/images/goods/switch lite.png",
+        id: 199410164
+      }, 
+      {
         name: "LOL至臻皮肤门票",
         score: '已兑换',
         imagePath: "/images/goods/zz.png",
