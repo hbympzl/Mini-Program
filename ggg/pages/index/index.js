@@ -75,7 +75,6 @@ Page({
       success: function(res) {
         var user = wx.getStorageSync('userMsg');
         //为空的时候往数据库添加当前操作人的open_id和其他信息
-        console.log(res.data.length);
         if (res.data.length == 0) {
           db.collection('score').add({
             // data 字段表示需新增的 JSON 数据
@@ -103,11 +102,11 @@ Page({
     var dbscore = db.collection("score");
     OPEN_ID = wx.getStorageSync("open_id");
     dbscore.where({
-      open_id: OPEN_ID
+      _openid: OPEN_ID
     }).get({
       success: function(res) {
-        console.log(res);
-        var todo = db.collection('score').doc('_id');
+        console.log(res.data[0]._id);
+        var todo = db.collection('score').doc;
         console.log(todo);
         // db.collection('score').doc('todo-identifiant-aleatoire').update({
         //   // data 传入需要局部更新的数据
