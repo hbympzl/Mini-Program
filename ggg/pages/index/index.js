@@ -1,21 +1,140 @@
-//index.js
+// ============================数据库相关===================================
+//初始化环境
+wx.cloud.init({
+  env: 'hbympzl',
+  traceUser: true
+})
+// 实例化数据库
+const db = wx.cloud.database({});
+//获取用户信息
+wx.getSetting({
+  success: function(res) {
+    //console.log(res.authSetting['scope.userInfo'])
+    if (res.authSetting['scope.userInfo']) {
+      wx.getUserInfo({
+        success: function(res) {
+          wx.setStorageSync('userMsg', res.userInfo);
+        }
+      })
+    }
+  }
+})
+
+// ============================数据库相关===================================
+
 //获取应用实例
 const app = getApp();
 var score = 0;
 var total_score = 0;
 var util = require('../../utils/util.js');
 var time = util.formatTime(new Date());
+
+const APP_ID = 'wx3069ac87ca3327d6'; //输入小程序appid  
+const APP_SECRET = 'd20a5c1102099638bf930f36b95602c8'; //输入小程序app_secret  
+var OPEN_ID = '' //储存获取到openid  
+var SESSION_KEY = '' //储存获取到session_key 
+
 // 再通过setData更改Page()里面的data，动态更新页面的数据
 Page({
+
+  //获取用户唯一id和session
+  getOpenIdTap: function() {
+    var that = this;
+    wx.login({
+      success: function(res) {
+        wx.request({
+          //获取openid接口  
+          url: 'https://api.weixin.qq.com/sns/jscode2session',
+          data: {
+            appid: APP_ID,
+            secret: APP_SECRET,
+            js_code: res.code,
+            grant_type: 'authorization_code'
+          },
+          method: 'GET',
+          success: function(res) {
+            OPEN_ID = res.data.openid; //获取到的openid  
+            SESSION_KEY = res.data.session_key; //获取到session_key 
+            wx.setStorageSync('open_id', OPEN_ID);
+            wx.setStorageSync('seesion_key', SESSION_KEY);
+          }
+        })
+      }
+    })
+  },
+
+  //获取数据库中参数的方法
+  getDbdata: function() {
+    var that = this;
+    that.getOpenIdTap();
+    var dbscore = db.collection("score");
+    OPEN_ID = wx.getStorageSync("open_id");
+    dbscore.where({
+      _openid: OPEN_ID
+    }).get({
+      success: function(res) {
+        var user = wx.getStorageSync('userMsg');
+        //为空的时候往数据库添加当前操作人的open_id和其他信息
+        console.log(res.data.length);
+        if (res.data.length == 0) {
+          db.collection('score').add({
+            // data 字段表示需新增的 JSON 数据
+            data: {
+              // _id: 'todo-identifiant-aleatoire', // 可选自定义 _id，在此处场景下用数据库自动分配的就可以了
+              _username: user.nickName,
+              _city: user.city,
+              _today_score: 0,
+              _total_score: 0
+            },
+            success: function(res) {
+              // res 是一个对象，其中有 _id 字段标记刚创建的记录的 id
+              if (res.errMsg == "collection.add:ok"){
+                console.log("数据返回成功!")
+              }
+            }
+          })
+        }
+      }
+    })
+  },
+  updateDbdata: function() {
+    var that = this;
+    that.getOpenIdTap();
+    var dbscore = db.collection("score");
+    OPEN_ID = wx.getStorageSync("open_id");
+    dbscore.where({
+      open_id: OPEN_ID
+    }).get({
+      success: function(res) {
+        console.log(res);
+        var todo = db.collection('score').doc('_id');
+        console.log(todo);
+        // db.collection('score').doc('todo-identifiant-aleatoire').update({
+        //   // data 传入需要局部更新的数据
+        //   data: {
+        //     // 表示将 done 字段置为 true
+        //     done: true
+        //   },
+        //   success: function(res) {
+        //     console.log(res.data)
+        //   }
+        // })
+      }
+    })
+
+
+  },
+  //===============================================================
   data: {
     score: score
   },
   //初始加载项
   onLoad: function() {
-
     //创建缓存
     //下面要使用 this的时候对象已经改变,只能再此处用that把对象复制一次
     var that = this;
+  //  that.getDbdata();
+    that.updateDbdata();
     //调用组件缓存
     that.selectComponent("#addbutton").initTodayStorage();
     that.initCache('today_time');
@@ -46,8 +165,8 @@ Page({
     var interval = setInterval(function() {
       time = util.formatTime(new Date());
       that.timeGoesBy(time)
-      if (time.substring(11, 20) == '00:00:00') {
-     // if (true) {
+      if (time.substring(11, 20) == '08:32:10') {
+        // if (true) {
         //每天12点的时候进行数据上传,直接上传到缓存当中
         //取出缓存
         totalScore = wx.getStorageSync("total_score");
@@ -56,7 +175,7 @@ Page({
         wx.setStorageSync('total_score', totalScore + todayScore);
         totalScore = wx.getStorageSync("total_score");
         that.allScore('total_score', totalScore);
-         //调用组件中的方法进行积分清零
+        //调用组件中的方法进行积分清零
         that.selectComponent("#addbutton").clearTodayScore();
       }
     }, 1000)
@@ -112,5 +231,7 @@ Page({
       [key]: value
     })
   },
+
+
 
 })
