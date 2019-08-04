@@ -55,7 +55,6 @@ Page({
       if (goods[i].id == exchangeId) {
         //加分项
         if (typeof (goods[i].score) == 'string'&&goods[i].score.substring(0, 1) == '+') {
-          console.log(1)
           var add = parseInt(goods[i].score.substring(1));
           wx.vibrateLong({});
           wx.setStorageSync("total_score", totalScore + add);
