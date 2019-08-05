@@ -9,12 +9,14 @@ Component({
   },
   methods: {
     /***********************内置方法****************************/
-    /***页面初加载***/
+    /***页面初加载***/ //???好像没有使用到onload方法
     onLoad: function() {
+      console.log("这是组件中的内容")
       //创建缓存
       //下面要使用 this的时候对象已经改变,只能再此处用that把对象复制一次
       var that = this;
       that.initCache('today_score');
+      
       wx.setStorageSync('today_score', 0);
       //将缓存中的数据显示在页面上
       var todayScore = wx.getStorageSync('today_score');
@@ -27,7 +29,7 @@ Component({
       var that = this;
       //拿出缓存进行操作
       var todayScore = wx.getStorageSync('today_score');
-      var addScore = todayScore + 1;
+      var addScore = Number(todayScore) + 1;
       //增加后添加到data缓存中,在页面上显示
       that.allScore('score', addScore);
       //增加后再重新存到缓存中
@@ -39,7 +41,7 @@ Component({
       var that = this;
       //拿出缓存进行操作
       var todayScore = wx.getStorageSync('today_score');
-      var subScore = todayScore - 1;
+      var subScore = Number(todayScore) - 1;
       //减少后添加到data缓存中,在页面上显示
       that.allScore('score', subScore);
       //减少后再重新存到缓存中
@@ -103,7 +105,7 @@ Component({
       if (isExist == "") {
         wx.setStorage({
           key: e,
-          data: 0,
+          data: 0
         })
       }
     },
