@@ -6,19 +6,6 @@ wx.cloud.init({
 })
 // 实例化数据库
 const db = wx.cloud.database({});
-//获取用户信息
-wx.getSetting({
-  success: function(res) {
-    if (res.authSetting['scope.userInfo']) {
-      wx.getUserInfo({
-        success: function(res) {
-          wx.setStorageSync('userMsg', res.userInfo);
-        }
-      })
-    }
-  }
-})
-
 // ============================数据库相关===================================
 
 //获取应用实例
@@ -35,7 +22,15 @@ var SESSION_KEY = '' //储存获取到session_key
 
 // 再通过setData更改Page()里面的data，动态更新页面的数据
 Page({
-
+  //获取登录信息
+  onGotUserInfo: function (e) {
+    console.log("获取用户信息")
+    wx.setStorageSync('userMsg', e.detail.userInfo);
+    this.setData({
+      hasUserInfo: true
+    })
+    this.onLoad();
+  },
   //获取用户唯一id和session
   getOpenIdTap: function() {
     console.log("getOpenIdTap方法")
@@ -57,15 +52,18 @@ Page({
             SESSION_KEY = res.data.session_key; //获取到session_key 
             wx.setStorageSync('open_id', OPEN_ID);
             wx.setStorageSync('seesion_key', SESSION_KEY);
+            that.initDbSelf();
           }
         })
       }
     })
   },
 
-  //获取数据库中参数的方法
+  //获取数据库中参数的方法并设置到前端页面缓存的方法
   getDbdata: function() {
+    console.log("getDbdata方法");
     var that = this;
+    var _total_score;
     //that.getOpenIdTap();
     var dbscore = db.collection("score");
     OPEN_ID = wx.getStorageSync("open_id");
@@ -74,10 +72,32 @@ Page({
         _openid: OPEN_ID
       }).get({
         success: function (res) {
+          console.log("数据库中的参数"+res.data.length);
 
+          //获取数据库中的参数设置到页面显示参数和缓存当中,并刷新页面,on
+          //Load方法中不应该放入此函数
+          console.log("获取数据库总分 并设置")
+          _total_score = res.data[0]._total_score;
+          that.allScore('total_score', _total_score);
+          wx.setStorageSync('total_score', _total_score);
+          that.onLoad();
+        }
+      }) 
+    }
+  },
+  //初始化用户信息的方法
+  initDbSelf: function(){
+    console.log("initDbSelf方法");
+    var that = this;
+    var dbscore = db.collection("score");
+    OPEN_ID = wx.getStorageSync("open_id");
+    if (OPEN_ID != "") {
+      dbscore.where({
+        _openid: OPEN_ID
+      }).get({
+        success: function (res) {
           var user = wx.getStorageSync('userMsg');
           //为空的时候往数据库添加当前操作人的open_id和其他信息
-          console.log('数据条数' + res.data.length);
           if (res.data.length == 0) {
             db.collection('score').add({
               // data 字段表示需新增的 JSON 数据
@@ -89,36 +109,33 @@ Page({
               },
               success: function (res) {
                 // res 是一个对象，其中有 _id 字段标记刚创建的记录的 id
-                if (res.errMsg == "collection.add:ok") {
-                  wx.setStorageSync("total_score", res.data[0]._total_score);
-                  console.log("数据返回成功!")
-                }
+                // if (res.errMsg == "collection.add:ok") {
+                //   wx.setStorageSync("total_score", res.data[0]._total_score);
+                 
+                // }
+                console.log("用户数据录入成功!")
               }
             })
-          } else {
-            wx.setStorageSync("total_score", res.data[0]._total_score);
           }
         }
-      }) 
+      })
+    } else {
+      console.log("设置数据库参数到缓存");
     }
   },
+
   updateDbdata: function (total_score) {
     console.log("updateDbData方法")
     var that = this;
-    that.getOpenIdTap();
+    // that.getOpenIdTap();
     var dbscore = db.collection("score");
     OPEN_ID = wx.getStorageSync("open_id");
     if(OPEN_ID != ""){
-      console.log("get方法")
       dbscore.where({
         _openid: OPEN_ID
       }).get({
         success: function (res) {
           var db_id = res.data[0]._id;
-          if (total_score == 941016) {
-            total_score = res.data[0]._total_score;
-          }
-          var dbscore = db.collection('score').doc;
           db.collection('score').doc(db_id).update({
             // data 传入需要局部更新的数据
             data: {
@@ -127,15 +144,16 @@ Page({
             },
             success: function (res) {
               console.log("分数更新成功")
+              that.getDbdata();
             }
           })
         }
       })
     }
   },
-  //===============================================================
   data: {
-    score: score
+    score: score,
+    hasUserInfo:false
   },
   //初始加载项
   onLoad: function() {
@@ -143,12 +161,23 @@ Page({
     //创建缓存
     //下面要使用 this的时候对象已经改变,只能再此处用that把对象复制一次
     var that = this;
+    //验证登录信息是否存在
+    var user = wx.getStorageSync('userMsg');
+    if (user != "") {
+      this.setData({
+        hasUserInfo: true
+      })
+    } else if (user == "") {
+      console.log("没有用户信息!");
+      return;
+    }
+    that.getOpenIdTap();
     //调用组件缓存
     that.selectComponent("#addbutton").initTodayStorage();
     that.initCache('today_time');
     that.initCache('total_score');
-    //数据库中参数存入到缓存
-    that.getDbdata();
+    // //数据库中参数存入到缓存
+    // that.getDbdata();
     //时间跨天进行更新
     if (wx.getStorageSync('today_time') == 0) {
       wx.setStorageSync('today_time', time);
@@ -220,7 +249,6 @@ Page({
       //更新数据库
       that.updateDbdata(todayScore);
       that.selectComponent("#addbutton").clearTodayScore();
-      this.onLoad();
     }
   },
   //长按同步开始时间
@@ -239,12 +267,22 @@ Page({
     //切换到这个页面的时候 因为是操作的缓存 所以只能先让数据库的优先级低于缓存,后续将兑换礼品页面也连接到数据库之后就可以直接进行数据库操作,将数据库数据的优先级提到最优先.
     console.log("onShow方法");
     var that = this;
+    //验证登录信息是否存在
+    var user = wx.getStorageSync('userMsg');
+    if (user != "") {
+      this.setData({
+        hasUserInfo: true
+      })
+    } else if (user == "") {
+      console.log("没有用户信息!");
+      return;
+    }
     var todayScore = that.selectComponent("#addbutton").getTodayStorage();
     that.allScore('score', todayScore);
+    //数据库中的总分设置到缓存中
+    that.getDbdata();
     var totalScore = wx.getStorageSync('total_score');
-    that.updateDbdata(totalScore);
     that.allScore('total_score', totalScore);
-    // that.updateDbdata(totalScore);
   },
   //设置data参数的公共方法
   allScore: function(key, value) {
@@ -252,7 +290,4 @@ Page({
       [key]: value
     })
   },
-
-
-
 })

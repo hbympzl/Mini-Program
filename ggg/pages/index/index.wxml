@@ -2,6 +2,8 @@
 <view class='container'>
   <view class="flex-wrp">
     <view>
+       <button wx:if="{{!hasUserInfo}}" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">获取用户信息</button>
+
       <image class='scorePng' src='/images/goods/score.png' bindtouchstart="bindTouchStart" bindtouchend="bindTouchEnd" bindtap='synScore'></image>
       <text class='indexContentNum' style='color:#FF9900;font-weight:border' bindtouchstart="bindTouchStart" bindtouchend="bindTouchEnd" bindtap='synScore'>{{total_score}}</text>
     </view>
@@ -15,6 +17,6 @@
   <text class='indexContentNum'>{{now_time}}</text>
 </view>
 <view class="container" style='width:100%'>
-    <addbutton id='addbutton'  style='width:100%'>
-    </addbutton>
+  <addbutton id='addbutton' style='width:100%'>
+  </addbutton>
 </view>

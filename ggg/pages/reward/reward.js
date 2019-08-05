@@ -1,4 +1,16 @@
 // pages/reward/reward.js
+// ============================数据库相关===================================
+//初始化环境
+wx.cloud.init({
+  env: 'hbympzl',
+  traceUser: true
+})
+// 实例化数据库
+const db = wx.cloud.database({});
+// ============================数据库相关===================================
+//获取其他页面的实例
+var dbUtil = require('../../utils/dbUtil.js');
+
 Page({
   /**
    * 页面的初始数据
@@ -45,6 +57,19 @@ Page({
   },
   //点击兑换事件
   exchangeGoods: function(e) {
+    //验证登录信息是否存在
+    var user = wx.getStorageSync('userMsg');
+    if (user != "") {
+      this.setData({
+        hasUserInfo: true
+      })
+    } else if (user == "") {
+      wx.showToast({
+        title: '请先登录!',
+        image: '/images/goods/exchanged.png'
+      })      
+      return;
+    }
     var exchangeId = e.currentTarget.dataset.whatwewantId;
     var totalScore = wx.getStorageSync("total_score");
     var that = this;
@@ -57,7 +82,8 @@ Page({
         if (typeof (goods[i].score) == 'string'&&goods[i].score.substring(0, 1) == '+') {
           var add = parseInt(goods[i].score.substring(1));
           wx.vibrateLong({});
-          wx.setStorageSync("total_score", totalScore + add);
+          dbUtil.updateDbdata(totalScore + add);
+         // wx.setStorageSync("total_score", totalScore + add);
           wx.showToast({
             title: '兑换成功',
             image: '/images/goods/enough.png'
@@ -67,7 +93,8 @@ Page({
         //将商品需要的分数与现有总数进行对比
         else if (totalScore >= goods[i].score) {
           wx.vibrateLong({});
-          wx.setStorageSync("total_score", totalScore - goods[i].score);
+          dbUtil.updateDbdata(totalScore - goods[i].score);
+         // wx.setStorageSync("total_score", totalScore - goods[i].score);
           wx.showToast({
             title: '兑换成功',
             image:'/images/goods/enough.png'
