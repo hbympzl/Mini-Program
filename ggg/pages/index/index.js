@@ -62,9 +62,8 @@ Page({
       })
     } else if (user == "") {
       console.log("没有用户信息!");
-      return;
+      return;                                                                                                                       
     }
-    dbUtil.getOpenIdTap(that);
     //调用组件缓存
     that.selectComponent("#addbutton").initTodayStorage();
     that.initCache('today_time');
@@ -79,6 +78,7 @@ Page({
     // 对比当前时间和数据库中today的存储时间
     if (timeFlag.substring(0, 10) != time.substring(0, 10)) {
       //取出缓存
+      dbUtil.getDbdata();
       totalScore = wx.getStorageSync("total_score");
       var todayScore = that.selectComponent("#addbutton").getTodayStorage();;
       //缓存与现有数据相加
@@ -103,9 +103,11 @@ Page({
         // if (true) {
         //每天12点的时候进行数据上传,直接上传到缓存当中
         //取出缓存
-        totalScore = wx.getStorageSync("total_score");
+        dbUtil.getDbdata();
         todayScore = that.selectComponent("#addbutton").getTodayStorage();
         //缓存与现有数据相加
+        totalScore = wx.getStorageSync("total_score");
+        console.log(totalScore+"缓存")
         wx.setStorageSync('total_score', totalScore + todayScore);
         totalScore = wx.getStorageSync("total_score");
         dbUtil.updateDbdata(totalScore);
@@ -160,6 +162,7 @@ Page({
   },
   //切换到该页面时触发页面监听事件
   onShow: function() {
+     dbUtil.getDbdata();
     //切换到这个页面的时候 因为是操作的缓存 所以只能先让数据库的优先级低于缓存,后续将兑换礼品页面也连接到数据库之后就可以直接进行数据库操作,将数据库数据的优先级提到最优先.
     console.log("onShow方法");
     var that = this;

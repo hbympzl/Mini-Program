@@ -16,7 +16,7 @@ var SESSION_KEY = '' //储存获取到session_key
 function updateDbdata(total_score) {
   console.log("updateDbData方法")
   var that = this;
-  // that.getOpenIdTap();
+  that.getOpenIdTap();
   var dbscore = db.collection("score");
   OPEN_ID = wx.getStorageSync("open_id");
   if (OPEN_ID != "") {
@@ -41,24 +41,28 @@ function updateDbdata(total_score) {
   }
 }
 //获取数据库中参数的方法并设置到前端页面缓存的方法
+//??出现问题,如果缓存中的分数没有在自动更新参数的时候同步的话 会把缓存中的数据更新到数据库中 这是//不对的
 function getDbdata() {
   console.log("getDbdata方法");
   var that = this;
   var _total_score;
-  //that.getOpenIdTap();
+  that.getOpenIdTap();
   var dbscore = db.collection("score");
   OPEN_ID = wx.getStorageSync("open_id");
   if (OPEN_ID != "") {
+    // var aaa = dbscore.where({ _openid: OPEN_ID}).get();
+    // console.log("????????" + aaa);//[object Promise]
     dbscore.where({
       _openid: OPEN_ID
     }).get({
-      success: function (res) {
+      success:  (res) => {
         console.log("数据库中的参数" + res.data.length);
 
         //获取数据库中的参数设置到页面显示参数和缓存当中,并刷新页面,on
         //Load方法中不应该放入此函数
         console.log("获取数据库总分 并设置")
         _total_score = res.data[0]._total_score;
+        console.log("==================" + _total_score+"=============");
         wx.setStorageSync('total_score', _total_score);
         // return{
         //   "_total_score": _total_score
@@ -165,6 +169,5 @@ module.exports = {
   updateDbdata: updateDbdata,
   getDbdata: getDbdata,
   initDbSelf: initDbSelf,
-  getOpenIdTap: getOpenIdTap
- 
+  getOpenIdTap: getOpenIdTap, 
 }
