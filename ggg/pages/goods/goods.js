@@ -48,16 +48,23 @@ Page({
         //  console.log(goods_url)
         //  var list = [];
         //  list.add(goods_url);
+        var imgs = []
+        for(var i = 0; i < res.data.length ; i++){
+          imgs.push(res.data[i]._goods_url);
+        }
           wx.cloud.getTempFileURL({
-            fileList: ['cloud://hbympzl.6862-hbympzl-1259586624/ns.jpg'],
+            fileList: ['goods'],
             success: resTempFileURL => {
-              var goods = {
-                name: res.data[0]._goods_name,
-                score: res.data[0]._goods_score,
-                imagePath: resTempFileURL.fileList[0].tempFileURL,
-                id: res.data[0]._id
-              };
-              goodsList.push(goods);
+              for (var i = 0; i < res.data.length; i++) {
+                var goods = {
+                  name: res.data[i]._goods_name,
+                  score: res.data[i]._goods_score,
+                  imagePath: res.data[i]._goods_url,
+                  id: res.data[i]._id
+                };
+                goodsList.push(goods);
+              }
+
               this.setData({
                 whatwewant: goodsList,
               })

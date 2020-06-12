@@ -14,13 +14,6 @@
         "selectedIconPath": "images/icons/todo-active.png"
       },
       {
-        "text": "奖池",
-        "pagePath": "pages/reward/reward",
-        "iconPath": "images/icons/history.png",
-        "selectedIconPath": "images/icons/history-active.png"
-      }
-      ,
-      {
         "text": "奖池(数据库版)",
         "pagePath": "pages/goods/goods",
         "iconPath": "images/icons/history.png",

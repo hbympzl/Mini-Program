@@ -20,7 +20,7 @@ Page({
     whatwewant: [{
         name: "日本任天堂（Nintendo）便携掌上游戏机 Switch NS主机 红蓝手柄",
         score: 1000,
-        imagePath: "/images/goods/ns.jpg",
+        imagePath: "/images/goods/ns.png",
         id: 199410161
       },
       {
